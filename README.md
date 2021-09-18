@@ -1,5 +1,5 @@
 # gotodo
-Aplikasi todo sederhana menggunakan framework gofiber
+Aplikasi todo sederhana menggunakan framework gin
 
 
 ## Setup
