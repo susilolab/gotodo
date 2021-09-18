@@ -1,17 +1,19 @@
 package main
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"github.com/gin-gonic/gin"
 	"github.com/susilolab/gotodo/services"
 )
 
 func main() {
-	app := fiber.New()
-
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello world")
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
 	})
-	services.TodoServices(app)
 
-	app.Listen(":3000")
+	services.TodoServices(r)
+
+	r.Run()
 }
