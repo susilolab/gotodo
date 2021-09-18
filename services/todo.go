@@ -1,30 +1,30 @@
 package services
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"github.com/gin-gonic/gin"
 	"github.com/susilolab/gotodo/models"
 )
 
-func TodoServices(app *fiber.App) {
-	todo := app.Group("todo")
+func TodoServices(app *gin.Engine) {
+	todo := app.Group("/todo")
 
 	// `/todo`
-	todo.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Todo")
+	todo.GET("/", func(c *gin.Context) {
+		c.String(200, "Todo")
 	})
 
 	// `/todo/1`
-	todo.Get("/:id", func(c *fiber.Ctx) error {
-		return c.SendString("Todo" + c.Params("id"))
+	todo.GET("/:id", func(c *gin.Context) {
+		c.String(200, "Todo"+c.Param("id"))
 	})
 
 	// `/todo`
-	todo.Post("/", func(c *fiber.Ctx) error {
-		t := new(models.Todo)
-		if err := c.BodyParser(t); err != nil {
-			return err
+	todo.POST("/", func(c *gin.Context) {
+		var t models.Todo
+		if err := c.BindJSON(&t); err != nil {
+			return
 		}
 
-		return c.JSON(t)
+		c.JSON(200, t)
 	})
 }
