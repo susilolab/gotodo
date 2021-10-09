@@ -1,0 +1,19 @@
+GET http://localhost:8080/todo/1
+
+###
+PATCH http://localhost:8080/todo/1
+Content-Type: application/json
+
+{
+    "body": "hallll", 
+    "done": false
+}
+
+###
+POST http://localhost:8080/todo
+Content-Type: application/json
+
+{
+    "body": "Bikin todo app", 
+    "done": false
+}
