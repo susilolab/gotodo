@@ -1,4 +1,7 @@
-GET http://localhost:8080/todo/1
+GET http://localhost:8080/todo
+
+###
+DELETE http://localhost:8080/todo/1
 
 ###
 PATCH http://localhost:8080/todo/1

@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	github.com/flosch/pongo2 v0.0.0-20200913210552-0d938eb266f3
+	github.com/gin-contrib/cors v1.3.1 // indirect
 	github.com/gin-gonic/gin v1.7.4
 	github.com/go-playground/validator/v10 v10.9.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0

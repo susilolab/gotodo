@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/flosch/pongo2"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/stnc/pongo2gin"
@@ -22,6 +23,7 @@ func main() {
 
 	gin.SetMode(gin.DebugMode)
 	r := gin.Default()
+	r.Use(cors.Default())
 	r.Use(gin.Recovery())
 	r.HTMLRender = pongo2gin.TemplatePath("views")
 	r.Static("/public", "./public")

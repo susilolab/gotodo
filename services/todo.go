@@ -28,6 +28,9 @@ func TodoServices(app *gin.Engine) {
 
 	// `/todo/:id`
 	todo.PATCH("/:id", updateTodo)
+
+	// `/todo/:id`
+	todo.DELETE("/:id", deleteTodo)
 }
 
 func todoIndex(c *gin.Context) {
@@ -168,6 +171,32 @@ func updateTodo(c *gin.Context) {
 	}
 
 	_, err = models.DB.Exec("UPDATE todos SET body = ?, done = ? WHERE id = ?", model.Body, model.Done, id)
+	if err != nil {
+		resp.Error = 1
+		resp.Message = err.Error()
+		c.JSON(400, resp)
+		return
+	}
+
+	c.JSON(200, resp)
+}
+
+func deleteTodo(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+
+	resp := Response{
+		Error:   0,
+		Message: "Data sukses dihapus",
+		Result:  nil,
+	}
+
+	if err != nil {
+		resp.Error = 1
+		resp.Message = "Invalid id"
+		return
+	}
+
+	_, err = models.DB.Exec("DELETE FROM todos WHERE id = ?", id)
 	if err != nil {
 		resp.Error = 1
 		resp.Message = err.Error()
